@@ -24,9 +24,13 @@ function bdcnd_placeholder_image() {
  * Comments widgets to the first available sidebar on a fresh install
  * (before the theme's own template-driven fallback design ever gets a say),
  * which would otherwise permanently hide our branded default blocks behind
- * plain, unstyled core widgets. Ignore those specific defaults so the
- * homepage/article sidebars only switch to dynamic_sidebar() output once
- * someone has deliberately customized them.
+ * plain, unstyled core widgets. Depending on the WordPress version/whether
+ * the block widgets editor has touched them, those defaults show up either
+ * as classic widget ids ("search-2") or migrated into generic "block-N"
+ * widgets wrapping core/search, core/latest-posts or core/latest-comments
+ * markup — both forms are ignored here. The homepage/article/footer areas
+ * only switch to dynamic_sidebar() output once someone has deliberately
+ * added something else.
  *
  * @param string $sidebar_id Registered sidebar id.
  * @return bool
@@ -42,15 +46,32 @@ function bdcnd_sidebar_has_real_widgets( $sidebar_id ) {
 	}
 
 	$core_default_prefixes = array( 'search-', 'recent-posts-', 'recent-comments-', 'archives-', 'categories-', 'meta-', 'calendar-', 'tag_cloud-' );
+	$core_default_blocks   = array( '<!-- wp:search', '<!-- wp:latest-posts', '<!-- wp:latest-comments', '<!-- wp:archives', '<!-- wp:categories', '<!-- wp:calendar', '<!-- wp:tag-cloud' );
 
 	foreach ( $sidebars_widgets[ $sidebar_id ] as $widget_id ) {
 		$is_core_default = false;
+
 		foreach ( $core_default_prefixes as $prefix ) {
 			if ( 0 === strpos( $widget_id, $prefix ) ) {
 				$is_core_default = true;
 				break;
 			}
 		}
+
+		if ( ! $is_core_default && 0 === strpos( $widget_id, 'block-' ) ) {
+			$instances = get_option( 'widget_block', array() );
+			$number    = (int) str_replace( 'block-', '', $widget_id );
+			$content   = isset( $instances[ $number ]['content'] ) ? $instances[ $number ]['content'] : '';
+
+			$is_core_default = false;
+			foreach ( $core_default_blocks as $needle ) {
+				if ( false !== strpos( $content, $needle ) ) {
+					$is_core_default = true;
+					break;
+				}
+			}
+		}
+
 		if ( ! $is_core_default ) {
 			return true;
 		}
