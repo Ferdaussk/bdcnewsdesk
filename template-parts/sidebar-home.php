@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 <div class="bdcnd-side-col">
 
-	<?php if ( is_active_sidebar( 'bdcnd-sidebar-home' ) ) : ?>
+	<?php if ( bdcnd_sidebar_has_real_widgets( 'bdcnd-sidebar-home' ) ) : ?>
 
 		<?php dynamic_sidebar( 'bdcnd-sidebar-home' ); ?>
 

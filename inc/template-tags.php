@@ -19,6 +19,47 @@ function bdcnd_placeholder_image() {
 }
 
 /**
+ * True only if a widget area has widgets the site owner actually chose to
+ * put there. WordPress auto-assigns its classic Search/Recent Posts/Recent
+ * Comments widgets to the first available sidebar on a fresh install
+ * (before the theme's own template-driven fallback design ever gets a say),
+ * which would otherwise permanently hide our branded default blocks behind
+ * plain, unstyled core widgets. Ignore those specific defaults so the
+ * homepage/article sidebars only switch to dynamic_sidebar() output once
+ * someone has deliberately customized them.
+ *
+ * @param string $sidebar_id Registered sidebar id.
+ * @return bool
+ */
+function bdcnd_sidebar_has_real_widgets( $sidebar_id ) {
+	if ( ! is_active_sidebar( $sidebar_id ) ) {
+		return false;
+	}
+
+	$sidebars_widgets = wp_get_sidebars_widgets();
+	if ( empty( $sidebars_widgets[ $sidebar_id ] ) ) {
+		return false;
+	}
+
+	$core_default_prefixes = array( 'search-', 'recent-posts-', 'recent-comments-', 'archives-', 'categories-', 'meta-', 'calendar-', 'tag_cloud-' );
+
+	foreach ( $sidebars_widgets[ $sidebar_id ] as $widget_id ) {
+		$is_core_default = false;
+		foreach ( $core_default_prefixes as $prefix ) {
+			if ( 0 === strpos( $widget_id, $prefix ) ) {
+				$is_core_default = true;
+				break;
+			}
+		}
+		if ( ! $is_core_default ) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+/**
  * Print a post's featured image, or the local placeholder.
  *
  * @param int    $post_id   Post ID.

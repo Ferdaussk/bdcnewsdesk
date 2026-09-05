@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <div class="bdcnd-side-col">
-	<?php if ( is_active_sidebar( 'bdcnd-sidebar-article' ) ) : ?>
+	<?php if ( bdcnd_sidebar_has_real_widgets( 'bdcnd-sidebar-article' ) ) : ?>
 		<?php dynamic_sidebar( 'bdcnd-sidebar-article' ); ?>
 	<?php else : ?>
 		<?php bdcnd_sidebar_most_read( __( 'সর্বাধিক পঠিত', 'bdc-news-desk' ) ); ?>

@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="bdcnd-footer">
 	<div class="bdcnd-wrap">
 
-		<?php if ( is_active_sidebar( 'bdcnd-footer' ) ) : ?>
+		<?php if ( bdcnd_sidebar_has_real_widgets( 'bdcnd-footer' ) ) : ?>
 			<div class="bdcnd-footer-widgets">
 				<?php dynamic_sidebar( 'bdcnd-footer' ); ?>
 			</div>
