@@ -26,3 +26,9 @@ jobs:
             --exclude=".github/" \
             --exclude=".gitignore" \
             ./ "${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_REMOTE_PATH }}"
+
+      - name: Purge LiteSpeed cache
+        run: |
+          ssh -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+            "${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}" \
+            "curl -s -o /dev/null -H 'X-LiteSpeed-Purge: *' -H 'Host: bdcnewsdesk.com' http://127.0.0.1/ || true"
