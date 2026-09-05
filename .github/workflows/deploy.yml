@@ -1,10 +1,9 @@
 name: Deploy theme to Hostinger
 
-# Runs every time you push to "main". Change branch name below if you
-# use a different default branch (e.g. "master").
+# Runs every time you push to "master".
 on:
   push:
-    branches: [main]
+    branches: [master]
 
 jobs:
   deploy:
