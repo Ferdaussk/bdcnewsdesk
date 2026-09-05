@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BDC News Desk - দেশের প্রথম সারির অনলাইন নিউজ পোর্টাল</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#170192;
+    --navy-dark:#0e0166;
+    --maroon:#9a1516;
+    --accent:#e8432c;
+    --green:#2e8b3d;
+    --tan:#c9bfa0;
+    --headline:#16325c;
+    --muted:#6b6b6b;
+    --link:#1a4fa0;
+    --border:#dbe3ef;
+    --bg:#eef1f5;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Hind Siliguri','Noto Sans Bengali',sans-serif;
+    background:var(--bg);
+    color:#222;
+    font-size:13.5px;
+    line-height:1.5;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;height:auto;}
+  .bdcnd-wrap{max-width:1240px;margin:0 auto;padding:0 10px;}
+  ul{margin:0;padding:0;list-style:none;}
+
+  /* ===================== TOP BAR ===================== */
+  .bdcnd-topbar{background:#fff;padding:14px 0;}
+  .bdcnd-topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:bdcnd-wrap;}
+
+  .bdcnd-logo-cell{display:flex;flex-direction:column;gap:4px;}
+  .bdcnd-logo-box{
+    background:var(--navy);
+    color:#fff;
+    padding:12px 20px 12px 34px;
+    border-radius:2px;
+    display:flex;
+    align-items:center;
+    position:relative;
+    overflow:visible;
+  }
+  .bdcnd-star-cluster{position:absolute;left:-6px;top:-8px;width:60px;height:70px;}
+  .bdcnd-star-cluster svg{width:100%;height:100%;}
+  .bdcnd-logo-text{
+    font-family:'Archivo Black','Hind Siliguri',sans-serif;
+    font-size:19px;
+    font-weight:900;
+    color:#fff;
+    letter-spacing:0.3px;
+    margin-left:22px;
+    white-space:nowrap;
+  }
+  .bdcnd-date-line{font-size:12px;color:#333;padding-left:4px;}
+
+  .bdcnd-search-block{display:flex;width:260px;}
+  .bdcnd-search-block input{
+    flex:1;border:1px solid #ccc;border-right:none;border-radius:2px 0 0 2px;padding:9px 10px;font-size:13px;outline:none;font-family:inherit;
+  }
+  .bdcnd-search-block button{
+    background:var(--green);color:#fff;border:none;padding:0 20px;border-radius:0 2px 2px 0;cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;
+  }
+
+  .bdcnd-ad-banner{
+    background:var(--tan);
+    color:#4a4530;
+    padding:18px 26px;
+    border-radius:2px;
+    font-size:13px;
+    font-weight:600;
+    text-align:center;
+    flex:1;
+    max-width:420px;
+  }
+
+  /* ===================== NAV ===================== */
+  .bdcnd-navbar{background:var(--navy);}
+  .bdcnd-navbar .bdcnd-wrap{display:flex;}
+  .bdcnd-navbar ul{display:flex;flex-wrap:bdcnd-wrap;flex:1;}
+  .bdcnd-navbar li{border-right:1px solid rgba(255,255,255,0.15);}
+  .bdcnd-navbar li.bdcnd-active a{background:var(--maroon);}
+  .bdcnd-navbar a{
+    display:block;color:#fff;padding:10px 14px;font-size:13px;font-weight:500;white-space:nowrap;
+  }
+  .bdcnd-navbar li a:hover{background:var(--navy-dark);}
+  .bdcnd-navbar li.bdcnd-dropdown{position:relative;}
+  .bdcnd-navbar li.bdcnd-dropdown:hover .bdcnd-dropdown-menu{display:block;}
+  .bdcnd-dropdown-menu{
+    display:none;position:absolute;top:100%;left:0;background:var(--navy);min-width:180px;z-index:20;border:1px solid rgba(255,255,255,0.15);
+  }
+  .bdcnd-dropdown-menu li{border-right:none;border-bottom:1px solid rgba(255,255,255,0.1);}
+
+  /* ===================== TICKER ===================== */
+  .bdcnd-ticker-bar{background:#fbfcfe;border:1px solid var(--border);margin-top:10px;display:flex;align-items:stretch;border-radius:2px;overflow:hidden;}
+  .bdcnd-ticker-label{background:var(--navy);color:#fff;font-weight:700;padding:9px 16px;font-size:13px;white-space:nowrap;display:flex;align-items:center;}
+  .bdcnd-ticker-track{flex:1;overflow:hidden;position:relative;display:flex;align-items:center;padding:0 12px;}
+  .bdcnd-ticker-content{white-space:nowrap;animation:ticker 30s linear infinite;color:var(--headline);font-size:13px;font-weight:600;}
+  .bdcnd-ticker-content span{margin-right:60px;}
+  @keyframes ticker{ 0%{transform:translateX(100%);} 100%{transform:translateX(-100%);} }
+  .bdcnd-ticker-tag{display:flex;align-items:center;gap:6px;padding:0 14px;font-size:12.5px;white-space:nowrap;color:#333;}
+  .bdcnd-ticker-tag .bdcnd-dot{width:9px;height:9px;background:var(--green);display:inline-block;}
+
+  /* ===================== LAYOUT ===================== */
+  .bdcnd-content-layout{display:flex;gap:14px;margin-top:14px;align-items:flex-start;}
+  .bdcnd-main-col{flex:1;min-width:0;}
+  .bdcnd-side-col{width:300px;flex-shrink:0;position:sticky;top:10px;}
+  .bdcnd-rank-list li{display:flex;gap:10px;padding:9px 0;border-top:1px dashed var(--border);align-items:flex-start;}
+  .bdcnd-rank-list li:first-child{border-top:none;}
+  .bdcnd-rank-num{width:22px;height:22px;background:var(--navy);color:#fff;font-size:12px;font-weight:700;border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .bdcnd-rank-list h5{font-size:12px;margin:0;font-weight:600;line-height:1.4;color:var(--headline);}
+  .bdcnd-side-ad{background:var(--tan);color:#4a4530;text-align:center;padding:26px 16px;font-size:13px;font-weight:600;border-radius:2px;}
+
+  /* ===================== SECTION HEADER (shared) ===================== */
+  .bdcnd-sec-header{
+    background:var(--navy);color:#fff;display:flex;align-items:center;gap:8px;
+    padding:9px 12px 9px 10px;font-weight:700;font-size:14px;border-left:6px solid var(--accent);
+  }
+  .bdcnd-sec-header .bdcnd-ico{
+    width:16px;height:14px;border:1.5px solid #fff;border-radius:2px;position:relative;flex-shrink:0;
+  }
+  .bdcnd-sec-header .bdcnd-ico::before,.bdcnd-sec-header .bdcnd-ico::after{content:"";position:absolute;left:2px;right:2px;height:1.5px;background:#fff;}
+  .bdcnd-sec-header .bdcnd-ico::before{top:4px;}
+  .bdcnd-sec-header .bdcnd-ico::after{top:8px;}
+  .bdcnd-sec-box{background:#fff;border:1px solid var(--border);border-top:none;}
+  .bdcnd-see-more{display:block;text-align:right;padding:8px 14px;font-size:12px;color:var(--link);border-top:1px solid var(--border);}
+  .bdcnd-see-more:hover{text-decoration:underline;}
+
+  /* ===================== HERO ===================== */
+  .bdcnd-hero-flex{display:flex;gap:16px;margin-bottom:14px;background:#fff;border:1px solid var(--border);padding:14px;}
+  .bdcnd-hero-main{flex:1.4;}
+  .bdcnd-hero-main img{width:100%;height:250px;object-fit:cover;}
+  .bdcnd-hero-main h1{font-size:18px;margin:12px 0 6px;line-height:1.35;color:var(--headline);font-weight:700;}
+  .bdcnd-hero-main p{color:var(--muted);font-size:12.5px;margin:0;}
+  .bdcnd-hero-main .bdcnd-more-link{color:var(--link);font-weight:600;}
+
+  .bdcnd-hero-list{flex:1;display:flex;flex-direction:column;}
+  .bdcnd-mini-item{display:flex;gap:10px;padding:8px 0;border-top:1px dashed var(--border);}
+  .bdcnd-mini-item:first-child{border-top:none;padding-top:0;}
+  .bdcnd-mini-item img{width:74px;height:56px;object-fit:cover;flex-shrink:0;}
+  .bdcnd-mini-item h4{font-size:12.5px;margin:0;line-height:1.45;font-weight:600;color:var(--headline);}
+
+  /* ===================== TWO-COL LIST GRID (thumb + headline + snippet) ===================== */
+  .bdcnd-list-grid{display:grid;grid-template-columns:1fr 1fr;margin-bottom:14px;background:#fff;border:1px solid var(--border);}
+  .bdcnd-list-grid > .bdcnd-li-item{display:flex;gap:10px;padding:12px;border-top:1px solid var(--border);}
+  .bdcnd-list-grid > .bdcnd-li-item:nth-child(1),.bdcnd-list-grid > .bdcnd-li-item:nth-child(2){border-top:none;}
+  .bdcnd-list-grid > .bdcnd-li-item:nth-child(odd){border-right:1px solid var(--border);}
+  .bdcnd-li-item img{width:100px;height:74px;object-fit:cover;flex-shrink:0;}
+  .bdcnd-li-item .bdcnd-li-body h4{font-size:13px;margin:0 0 4px;line-height:1.4;font-weight:700;color:var(--headline);}
+  .bdcnd-li-item .bdcnd-li-body p{font-size:11.5px;color:var(--muted);margin:0;}
+  .bdcnd-li-item .bdcnd-li-body .bdcnd-more-link{color:var(--link);font-weight:600;}
+
+  /* ===================== FEATURED + MINI GRID (Bangladesh style) ===================== */
+  .bdcnd-feat-grid{display:flex;gap:16px;padding:14px;}
+  .bdcnd-feat-main{flex:1;}
+  .bdcnd-feat-main img{width:100%;height:220px;object-fit:cover;}
+  .bdcnd-feat-main h3{font-size:15.5px;margin:10px 0 6px;line-height:1.4;color:var(--headline);}
+  .bdcnd-feat-main p{font-size:12px;color:var(--muted);margin:0;}
+  .bdcnd-feat-side{flex:1.3;display:grid;grid-template-columns:1fr 1fr;gap:0;}
+  .bdcnd-feat-side .bdcnd-li-item{padding:0 10px 12px;}
+  .bdcnd-feat-side .bdcnd-li-item:nth-child(-n+2){padding-top:0;}
+  .bdcnd-feat-side .bdcnd-li-item img{width:80px;height:60px;}
+  .bdcnd-feat-side .bdcnd-li-item h4{font-size:12.5px;margin:0 0 3px;font-weight:700;color:var(--headline);line-height:1.4;}
+  .bdcnd-feat-side .bdcnd-li-item p{font-size:11px;color:var(--muted);margin:0;}
+
+  /* ===================== TEXT-ONLY GRID (politics: thumb + headline only) ===================== */
+  .bdcnd-text-grid{display:grid;grid-template-columns:repeat(3,1fr);}
+  .bdcnd-text-grid .bdcnd-ti-item{display:flex;gap:8px;padding:12px;border-top:1px dashed var(--border);}
+  .bdcnd-text-grid .bdcnd-ti-item:nth-child(-n+3){border-top:none;}
+  .bdcnd-text-grid .bdcnd-ti-item:not(:nth-child(3n)){border-right:1px dashed var(--border);}
+  .bdcnd-text-grid img{width:66px;height:50px;object-fit:cover;flex-shrink:0;}
+  .bdcnd-text-grid h4{font-size:12.5px;margin:0;line-height:1.45;font-weight:600;color:var(--headline);}
+
+  /* ===================== TRIAD COLUMNS (sports/foreign/entertainment, tech/opinion/economy, edu/lit/feature) ===================== */
+  .bdcnd-three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px;}
+  .bdcnd-col-box{background:#fff;border:1px solid var(--border);overflow:hidden;}
+  .bdcnd-col-box img.bdcnd-main-img{width:100%;height:150px;object-fit:cover;}
+  .bdcnd-col-box .bdcnd-col-body{padding:12px 14px 4px;}
+  .bdcnd-col-box h3{font-size:13.5px;margin:0 0 10px;line-height:1.45;color:var(--headline);font-weight:700;}
+  .bdcnd-bullet-list{margin:0;padding:0;}
+  .bdcnd-bullet-list li{
+    font-size:12px;padding:7px 0 7px 22px;border-top:1px dashed var(--border);position:relative;color:#333;line-height:1.4;
+  }
+  .bdcnd-bullet-list li:first-child{border-top:none;}
+  .bdcnd-bullet-list li::before{
+    content:"\276F";color:#fff;background:var(--accent);position:absolute;left:0;top:6px;font-size:8px;
+    width:15px;height:15px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  }
+
+  /* ===================== TWO-COL (media / jobs) ===================== */
+  .bdcnd-two-col{display:grid;grid-template-columns:1.5fr 1fr;gap:14px;margin-bottom:14px;}
+  .bdcnd-thumb-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;padding:14px;}
+  .bdcnd-thumb-cell img{width:100%;height:76px;object-fit:cover;margin-bottom:6px;}
+  .bdcnd-thumb-cell h4{font-size:12px;margin:0;font-weight:600;color:var(--headline);line-height:1.4;}
+
+  .bdcnd-job-list{padding:6px 0;}
+  .bdcnd-job-list li{display:flex;gap:10px;align-items:center;padding:9px 14px;border-top:1px dashed var(--border);}
+  .bdcnd-job-list li:first-child{border-top:none;}
+  .bdcnd-job-list img{width:46px;height:46px;object-fit:cover;flex-shrink:0;}
+  .bdcnd-job-list h5{font-size:12.5px;margin:0;font-weight:700;line-height:1.4;color:var(--headline);}
+
+  /* ===================== GALLERY ===================== */
+  .bdcnd-gallery-box{background:#fff;border:1px solid var(--border);overflow:hidden;}
+  .bdcnd-gallery-box img{width:100%;height:220px;object-fit:cover;}
+  .bdcnd-gallery-cap{padding:10px 14px;font-size:13px;font-weight:600;color:var(--headline);}
+  .bdcnd-video-box{position:relative;background:#0c0c14;height:220px;display:flex;align-items:center;justify-content:center;flex-direction:column;color:#fff;}
+  .bdcnd-video-box .bdcnd-yt{display:flex;align-items:center;gap:6px;font-size:13px;color:#fff;opacity:.9;margin-bottom:10px;font-weight:700;}
+  .bdcnd-video-box .bdcnd-msg{font-size:15px;font-weight:600;}
+  .bdcnd-video-box .bdcnd-sub{font-size:11.5px;opacity:.65;margin-top:6px;text-align:center;padding:0 40px;}
+  .bdcnd-video-nav{position:absolute;top:50%;right:10px;transform:translateY(-50%);background:rgba(255,255,255,0.15);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+
+  /* ===================== SIDEBAR ===================== */
+  .bdcnd-widget{background:#fff;border:1px solid var(--border);margin-bottom:14px;overflow:hidden;}
+  .bdcnd-widget-header{background:var(--navy);color:#fff;padding:9px 12px;font-weight:700;font-size:13.5px;border-left:6px solid var(--accent);}
+  .bdcnd-widget-body{padding:12px 14px;}
+  .bdcnd-fb-embed{
+    background:linear-gradient(135deg,#1877f2,#0d5cc4);color:#fff;border-radius:2px;padding:18px;text-align:center;font-size:12px;
+  }
+  .bdcnd-fb-embed .bdcnd-fb-title{font-weight:700;font-size:14px;margin-bottom:6px;}
+  .bdcnd-fb-embed button{margin-top:10px;background:#fff;color:#1877f2;border:none;padding:6px 14px;border-radius:2px;font-weight:700;font-size:12px;cursor:pointer;}
+
+  .bdcnd-archive-row{display:flex;gap:6px;margin-bottom:10px;}
+  .bdcnd-archive-row input{flex:1;padding:8px;font-size:12px;border:1px solid #ccc;border-radius:2px;font-family:inherit;}
+  .bdcnd-archive-row button{background:var(--green);color:#fff;border:none;padding:0 14px;border-radius:2px;font-size:12px;cursor:pointer;font-weight:600;}
+  .bdcnd-tab-row{display:flex;border-bottom:1px solid var(--border);margin:0 -14px 4px;}
+  .bdcnd-tab-row .bdcnd-tab{flex:1;text-align:center;padding:8px 0;font-size:12.5px;font-weight:600;color:#555;background:#f2f2f2;cursor:pointer;}
+  .bdcnd-tab-row .bdcnd-tab.bdcnd-active{background:#fff;color:var(--headline);border-bottom:2px solid var(--navy);}
+  .bdcnd-recent-list{max-height:340px;overflow-y:auto;}
+  .bdcnd-recent-list li{display:flex;gap:10px;padding:8px 0;border-top:1px dashed var(--border);}
+  .bdcnd-recent-list li:first-child{border-top:none;}
+  .bdcnd-recent-list img{width:56px;height:44px;object-fit:cover;flex-shrink:0;}
+  .bdcnd-recent-list h5{font-size:12px;margin:0;font-weight:600;line-height:1.4;color:var(--headline);}
+
+  .bdcnd-side-feature img{width:100%;height:160px;object-fit:cover;}
+  .bdcnd-side-feature h4{font-size:13px;margin:10px 14px 12px;line-height:1.4;color:var(--headline);font-weight:700;}
+  .bdcnd-side-list{padding:0 14px 12px;}
+  .bdcnd-side-list li{display:flex;gap:10px;padding:8px 0;border-top:1px dashed var(--border);}
+  .bdcnd-side-list li:first-child{border-top:none;}
+  .bdcnd-side-list img{width:52px;height:42px;object-fit:cover;flex-shrink:0;}
+  .bdcnd-side-list h5{font-size:12px;margin:0;font-weight:600;line-height:1.4;color:var(--headline);}
+
+  /* ===================== FOOTER ===================== */
+  .bdcnd-footer{background:var(--navy);color:#fff;margin-top:20px;padding:20px 0 16px;}
+  .bdcnd-footer-inner{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:bdcnd-wrap;gap:14px;}
+  .bdcnd-footer-logo .bdcnd-logo-box{background:transparent;padding:0 0 0 34px;}
+  .bdcnd-footer-meta{text-align:right;font-size:12.5px;line-height:2;}
+  .bdcnd-footer-bottom{border-top:1px solid rgba(255,255,255,0.25);margin-top:16px;padding-top:12px;font-size:12px;color:#dfe3f5;}
+  .bdcnd-footer-bottom a{color:#ff8a65;}
+
+  @media(max-width:960px){
+    .bdcnd-content-layout{flex-direction:column;}
+    .bdcnd-side-col{width:100%;position:static;}
+    .bdcnd-hero-flex{flex-direction:column;}
+    .bdcnd-list-grid, .bdcnd-text-grid, .bdcnd-three-col, .bdcnd-feat-grid, .bdcnd-thumb-grid{grid-template-columns:1fr 1fr;}
+    .bdcnd-feat-grid{flex-direction:column;}
+  }
+  @media(max-width:600px){
+    .bdcnd-list-grid, .bdcnd-text-grid, .bdcnd-three-col, .bdcnd-two-col, .bdcnd-thumb-grid, .bdcnd-feat-side{grid-template-columns:1fr;}
+    .bdcnd-topbar-inner{flex-direction:column;align-items:stretch;}
+    .bdcnd-search-block{width:100%;}
+    .bdcnd-ad-banner{max-width:100%;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= TOP BAR ================= -->
+<div class="bdcnd-topbar">
+  <div class="bdcnd-wrap bdcnd-topbar-inner">
+    <div class="bdcnd-logo-cell">
+      <div class="bdcnd-logo-box">
+        <div class="bdcnd-star-cluster">
+          <svg viewBox="0 0 60 70" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bdcnd-g1" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0%" stop-color="#8a8a8a"/>
+                <stop offset="100%" stop-color="#fff2b0"/>
+              </linearGradient>
+            </defs>
+            <g fill="url(#bdcnd-g1)">
+              <polygon points="10,66 12,60 14,66 20,66 15,70 17,76 10,72 3,76 5,70 0,66" transform="translate(0,-10) scale(0.5)"/>
+              <polygon points="18,56 21,49 24,56 31,56 25,60 28,67 21,63 14,67 17,60 11,56" transform="translate(-2,-4) scale(0.62)"/>
+              <polygon points="24,42 28,33 32,42 41,42 34,47 37,56 28,51 19,56 22,47 15,42" transform="translate(0,4) scale(0.72)"/>
+              <polygon points="30,26 35,15 40,26 51,26 42,32 46,43 35,37 24,43 28,32 19,26" transform="translate(2,8) scale(0.85)"/>
+              <polygon points="36,8 42,-6 48,8 62,8 51,15 56,29 42,21 28,29 33,15 22,8" transform="translate(3,14) scale(1)"/>
+            </g>
+          </svg>
+        </div>
+        <div class="bdcnd-logo-text">BDC News Desk</div>
+      </div>
+      <div class="bdcnd-date-line">বুধবার, ১৯ আগস্ট ২০২৬, ১০:৩৫ অপরাহ্ন</div>
+    </div>
+
+    <form class="bdcnd-search-block">
+      <input type="text" placeholder="লিখুন...">
+      <button type="submit">খুঁজুন</button>
+    </form>
+
+    <div class="bdcnd-ad-banner">আপনার প্রতিষ্ঠানের বিশ্বব্যাপী প্রচারের জন্য বিজ্ঞাপন দিন</div>
+  </div>
+</div>
+
+<!-- ================= NAV ================= -->
+<div class="bdcnd-navbar">
+  <div class="bdcnd-wrap">
+    <ul>
+      <li class="bdcnd-active"><a href="#">প্রচ্ছদ</a></li>
+      <li><a href="#">বাংলাদেশ</a></li>
+      <li><a href="#">প্রবাস</a></li>
+      <li><a href="#">রাজনীতি</a></li>
+      <li><a href="#">খেলা</a></li>
+      <li><a href="#">বিদেশ</a></li>
+      <li><a href="#">বিনোদন</a></li>
+      <li><a href="#">গণমাধ্যম</a></li>
+      <li><a href="#">চাকরির খবর</a></li>
+      <li><a href="#">বিজ্ঞান ও তথ্যপ্রযুক্তি</a></li>
+      <li><a href="#">মতামত</a></li>
+      <li><a href="#">অর্থনীতি</a></li>
+      <li><a href="#">শিক্ষা</a></li>
+      <li class="bdcnd-dropdown">
+        <a href="#">অন্যান্য ▾</a>
+        <ul class="bdcnd-dropdown-menu">
+          <li><a href="#">সাহিত্য</a></li>
+          <li><a href="#">ফিচার</a></li>
+          <li><a href="#">ফটো গ্যালারী</a></li>
+          <li><a href="#">ভিডিও গ্যালারী</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="bdcnd-wrap">
+  <!-- ================= TICKER ================= -->
+  <div class="bdcnd-ticker-bar">
+    <div class="bdcnd-ticker-label">শিরোনাম :</div>
+    <div class="bdcnd-ticker-track">
+      <div class="bdcnd-ticker-content">
+        <span>সাব-রেজিস্ট্রার বদলিতে আসিফ নজরুলের শত কোটি টাকার দুর্নীতির নেপথ্যে রমজান-মাইকেল চক্র</span>
+        <span>রোজায় টানা ৩৫ দিনের ছুটিতে শিক্ষাপ্রতিষ্ঠান</span>
+        <span>হাদির কবর জিয়ারত করলেন তারেক রহমান</span>
+        <span>তারেক রহমান ২৪ ঘণ্টার মধ্যেই এনআইডি পাবেন : ডিজি</span>
+      </div>
+    </div>
+    <div class="bdcnd-ticker-tag"><span class="bdcnd-dot"></span> আওয়ামীপন্থি</div>
+  </div>
+
+  <!-- ================= MAIN LAYOUT ================= -->
+  <div class="bdcnd-content-layout">
+
+    <!-- ========== MAIN COLUMN ========== -->
+    <div class="bdcnd-main-col">
+
+      <!-- HERO -->
+      <div class="bdcnd-hero-flex">
+        <div class="bdcnd-hero-main">
+          <img src="https://picsum.photos/seed/starmail-hero/700/300" alt="">
+          <h1>আওয়ামীপন্থি সিবিএ নেতার কবজায় জাতীয় গৃহায়ন কর্তৃপক্ষ</h1>
+          <p>স্বল্প আয়ের মানুষের মানসম্মত আবাসন নিশ্চিতে কাজ করে জাতীয় গৃহায়ন কর্তৃপক্ষ (জাগৃক)। কিন্তু প্রতিষ্ঠানটির ভিতর... <a href="#" class="bdcnd-more-link">বিস্তারিত</a></p>
+        </div>
+        <div class="bdcnd-hero-list">
+          <div class="bdcnd-mini-item">
+            <img src="https://picsum.photos/seed/sm1/100/80" alt="">
+            <h4>সাব-রেজিস্ট্রার বদলিতে আসিফ নজরুলের শত কোটি টাকার দুর্নীতির নেপথ্যে রমজান-মাইকেল চক্র</h4>
+          </div>
+          <div class="bdcnd-mini-item">
+            <img src="https://picsum.photos/seed/sm2/100/80" alt="">
+            <h4>রোজায় টানা ৩৫ দিনের ছুটিতে শিক্ষাপ্রতিষ্ঠান</h4>
+          </div>
+          <div class="bdcnd-mini-item">
+            <img src="https://picsum.photos/seed/sm3/100/80" alt="">
+            <h4>হাদির কবর জিয়ারত করলেন তারেক রহমান</h4>
+          </div>
+          <div class="bdcnd-mini-item">
+            <img src="https://picsum.photos/seed/sm4/100/80" alt="">
+            <h4>তারেক রহমান ২৪ ঘণ্টার মধ্যেই এনআইডি পাবেন : ডিজি</h4>
+          </div>
+        </div>
+      </div>
+
+      <!-- LIST GRID (2 columns) -->
+      <div class="bdcnd-list-grid">
+        <div class="bdcnd-li-item">
+          <img src="https://picsum.photos/seed/c1/200/150" alt="">
+          <div class="bdcnd-li-body">
+            <h4>প্রবাসে ক্রিকেট ও বাঙালিয়ানার উৎসব, ফ্লাডলাইটে মুখোমুখি আট দল</h4>
+            <p>২২ আগস্ট বসছে শখ পিচ ক্রিকেটের বর্ণাঢ্য আসর... <a href="#" class="bdcnd-more-link">বিস্তারিত</a></p>
+          </div>
+        </div>
+        <div class="bdcnd-li-item">
+          <img src="https://picsum.photos/seed/c2/200/150" alt="">
+          <div class="bdcnd-li-body">
+            <h4>সিন্ডিকেট ভেঙে ৫০ কোটি টাকা বেশি রাজস্ব আদায় করেও সমালোচনায় সাভার সাব-রেজিস্ট্রার</h4>
+            <p>সাভারে নিয়ম বহির্ভূতভাবে কাজ না করার পাশাপাশি সকল প্রকার অনিয়মের... <a href="#" class="bdcnd-more-link">বিস্তারিত</a></p>
+          </div>
+        </div>
+        <div class="bdcnd-li-item">
+          <img src="https://picsum.photos/seed/c3/200/150" alt="">
+          <div class="bdcnd-li-body">
+            <h4>পরিশ্রম ও সততা মানুষকে শূন্য থেকে সম্মান উচ্চতায় নিয়ে যায়: বাসস চেয়ারম্যান</h4>
+            <p>উচ্চতায় নিয়ে যায় বলে মন্তব্য... <a href="#" class="bdcnd-more-link">বিস্তারিত</a></p>
+          </div>
+        </div>
+        <div class="bdcnd-li-item">
+          <img src="https://picsum.photos/seed/c4/200/150" alt="">
+          <div class="bdcnd-li-body">
+            <h4>মালয়েশিয়ায় কোকোর মৃত্যু রহস্য উদঘাটনে সুষ্ঠু তদন্ত ও দুস্কৃতিকারীদের প্রধান বিচার দাবি</h4>
+            <p>প্রধান প্রণব কুমার ভট্টাচার্যকে প্রত্যাহারের দাবি স্মারকলিপি প্রদান... <a href="#" class="bdcnd-more-link">বিস্তারিত</a></p>
+          </div>
+        </div>
+        <div class="bdcnd-li-item">
+          <img src="https://picsum.photos/seed/c5/200/150" alt="">
+          <div class="bdcnd-li-body">
+            <h4>গণভোটের রায় ও জুলাই সনদ উপেক্ষা করলে বর্তমান সরকারের রাজনৈতিক বৈধতা থাকবে না</h4>
+            <p>'গণভোটের রায় ও জুলাই সনদ উপেক্ষা করলে বর্তমান সরকার ও সংসদের কোন...' <a href="#" class="bdcnd-more-link">বিস্তারিত</a></p>
+          </div>
+        </div>
+        <div class="bdcnd-li-item">
+          <img src="https://picsum.photos/seed/c6/200/150" alt="">
+          <div class="bdcnd-li-body">
+            <h4>সংরক্ষিত নারী আসনে পার্বত্যাঞ্চল থেকে আলোচনায় শিরিনা আক্তার</h4>
+            <p>প্রয়োজন সংবিধান পরবর্তী জাতীয় সংসদে সংরক্ষিত নারী আসনে নিয়ে তৎপরতা... <a href="#" class="bdcnd-more-link">বিস্তারিত</a></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= বাংলাদেশ ================= -->
+      <div>
+        <div class="bdcnd-sec-header"><span class="bdcnd-ico"></span> বাংলাদেশ</div>
+        <div class="bdcnd-sec-box">
+          <div class="bdcnd-feat-grid">
+            <div class="bdcnd-feat-main">
+              <img src="https://picsum.photos/seed/bd-main/500/300" alt="">
+              <h3>আওয়ামীপন্থি সিবিএ নেতার কবজায় জাতীয় গৃহায়ন কর্তৃপক্ষ</h3>
+              <p>স্বল্প আয়ের মানুষের মানসম্মত আবাসন নিশ্চিতে কাজ করে জাতীয় গৃহায়ন কর্তৃপক্ষ (জাগৃক)। কিন্তু প্রতিষ্ঠানটির ভিতর... <a href="#" class="bdcnd-more-link">বিস্তারিত</a></p>
+            </div>
+            <div class="bdcnd-feat-side">
+              <div class="bdcnd-li-item">
+                <img src="https://picsum.photos/seed/bd1/100/80" alt="">
+                <div class="bdcnd-li-body">
+                  <h4>সাব-রেজিস্ট্রার বদলিতে আসিফ নজরুলের শত কোটি টাকার দুর্নীতির অভিযোগ উঠেছে</h4>
+                  <p>সাব-রেজিস্ট্রার বদলিতে কেন্দ্র করে শতকোটি টাকার দুর্নীতির... <a href="#" class="bdcnd-more-link">বিস্তারিত</a></p>
+                </div>
+              </div>
+              <div class="bdcnd-li-item">
+                <img src="https://picsum.photos/seed/bd2/100/80" alt="">
+                <div class="bdcnd-li-body">
+                  <h4>সিন্ডিকেট ভেঙে ৫০ কোটি টাকা বেশি রাজস্ব আদায় করেও সমালোচনায় সাভার সাব-রেজিস্ট্রার</h4>
+                  <p>সাভারে নিয়ম বহির্ভূতভাবে কাজ না করার... <a href="#" class="bdcnd-more-link">বিস্তারিত</a></p>
+                </div>
+              </div>
+              <div class="bdcnd-li-item">
+                <img src="https://picsum.photos/seed/bd3/100/80" alt="">
+                <div class="bdcnd-li-body">
+                  <h4>পদ্মা অয়েল কোম্পানিতে পদ পেতে এমডির ওপর চড়াও হলেন ডিজিএম ফারুক</h4>
+                  <p>পদ্মা অয়েল কোম্পানির ডিজিএম অপারেশন পদ পেতে এমডিসহ সিনিয়র কর্মকর্তাদের... <a href="#" class="bdcnd-more-link">বিস্তারিত</a></p>
+                </div>
+              </div>
+              <div class="bdcnd-li-item">
+                <img src="https://picsum.photos/seed/bd4/100/80" alt="">
+                <div class="bdcnd-li-body">
+                  <h4>তারেক রহমান ২৪ ঘণ্টার মধ্যেই এনআইডি পাবেন : ডিজি</h4>
+                  <p>বিএনপির ভারপ্রাপ্ত চেয়ারম্যান তারেক রহমান ফিরারপ্রিন্ট দেওয়ার পর ৭ থেকে... <a href="#" class="bdcnd-more-link">বিস্তারিত</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a href="#" class="bdcnd-see-more">আরো.. »</a>
+        </div>
+      </div>
+
+      <!-- ================= রাজনীতি ================= -->
+      <div>
+        <div class="bdcnd-sec-header"><span class="bdcnd-ico"></span> রাজনীতি</div>
+        <div class="bdcnd-sec-box">
+          <div class="bdcnd-text-grid">
+            <div class="bdcnd-ti-item">
+              <img src="https://picsum.photos/seed/p1/70/50" alt="">
+              <h4>গণভোটের রায় ও জুলাই সনদ উপেক্ষা করলে বর্তমান সরকারের রাজনৈতিক বৈধতা থাকবে না</h4>
+            </div>
+            <div class="bdcnd-ti-item">
+              <img src="https://picsum.photos/seed/p2/70/50" alt="">
+              <h4>সংরক্ষিত নারী আসনে পার্বত্যাঞ্চল থেকে আলোচনায় শিরিনা আক্তার</h4>
+            </div>
+            <div class="bdcnd-ti-item">
+              <img src="https://picsum.photos/seed/p3/70/50" alt="">
+              <h4>সংরক্ষিত নারী আসনে আলোচনায় নির্যাতিত হেফাজতে সেবক দল নেত্রী শাহীনূর বেগম</h4>
+            </div>
+            <div class="bdcnd-ti-item">
+              <img src="https://picsum.photos/seed/p4/70/50" alt="">
+              <h4>তারেক রহমানকে নিয়ে ফেসবুকে ছাত্রদল নেতা তারিকের আবেগঘন পোস্ট</h4>
+            </div>
+            <div class="bdcnd-ti-item">
+              <img src="https://picsum.photos/seed/p5/70/50" alt="">
+              <h4>আগামী নির্বাচনে বাদ পড়লেন বিএনপির যেসব হেভিওয়েট নেতারা</h4>
+            </div>
+            <div class="bdcnd-ti-item">
+              <img src="https://picsum.photos/seed/p6/70/50" alt="">
+              <h4>হাদির কবর জিয়ারত করলেন তারেক রহমান</h4>
+            </div>
+            <div class="bdcnd-ti-item">
+              <img src="https://picsum.photos/seed/p7/70/50" alt="">
+              <h4>তারেক রহমান ২৪ ঘণ্টার মধ্যেই এনআইডি পাবেন : ডিজি</h4>
+            </div>
+            <div class="bdcnd-ti-item">
+              <img src="https://picsum.photos/seed/p8/70/50" alt="">
+              <h4>গণঅধিকার পরিষদ থেকে পদত্যাগ করে বিএনপিতে যোগ দিলেন রাশেদ</h4>
+            </div>
+            <div class="bdcnd-ti-item">
+              <img src="https://picsum.photos/seed/p9/70/50" alt="">
+              <h4>ওসমান বিন হাদির ওপর হামলায় জড়িতদের দ্রুত গ্রেফতারের নির্দেশ প্রধান উপদেষ্টার</h4>
+            </div>
+          </div>
+          <a href="#" class="bdcnd-see-more">আরো.. »</a>
+        </div>
+      </div>
+
+      <!-- ================= খেলা / বিদেশ / বিনোদন ================= -->
+      <div class="bdcnd-three-col">
+        <div class="bdcnd-col-box">
+          <div class="bdcnd-sec-header"><span class="bdcnd-ico"></span> খেলা</div>
+          <img class="bdcnd-main-img" src="https://picsum.photos/seed/sport-main/300/150" alt="">
+          <div class="bdcnd-col-body">
+            <h3>প্রবাসে ক্রিকেট ও বাঙালিয়ানার উৎসব, ফ্লাডলাইটে মুখোমুখি আট দল</h3>
+          </div>
+          <ul class="bdcnd-bullet-list">
+            <li>ঢাবি আন্তঃবিভাগ ক্রিকেটে চ্যাম্পিয়ন সমাজবিজ্ঞান ও গবেষণা ইনস্টিটিউট</li>
+            <li>বিসিবির গুরুত্বপূর্ণ কোনো পদে আসতে পারেন মাশরাফি</li>
+            <li>২০২৮ টি-টোয়েন্টি বিশ্বকাপে সরাসরি খেলবে বাংলাদেশ</li>
+            <li>মালয়েশিয়ায় প্রীতি ফুটসাল ম্যাচে জামাল ভুঁইয়ার গোল সরল দলের জয়</li>
+          </ul>
+          <a href="#" class="bdcnd-see-more">আরো.. »</a>
+        </div>
+
+        <div class="bdcnd-col-box">
+          <div class="bdcnd-sec-header"><span class="bdcnd-ico"></span> বিদেশ</div>
+          <img class="bdcnd-main-img" src="https://picsum.photos/seed/foreign-main/300/150" alt="">
+          <div class="bdcnd-col-body">
+            <h3>'সেভেন সিস্টার্স' ভারত থেকে বিচ্ছিন্ন করে দেয়ার হুমকি এনআইপি নেতার, বাংলাদেশি হাইকমিশনারকে তলব করল ভারত</h3>
+          </div>
+          <ul class="bdcnd-bullet-list">
+            <li>এই মাসে চালু হবে যুক্তরাষ্ট্রের গোল্ড কার্ড ভিসা</li>
+            <li>মামলার কথায় মার্কিন প্রেসিডেন্ট হতে পারবেন না</li>
+            <li>ভারতের ছয়টি প্রতিষ্ঠানের ওপর নিষেধাজ্ঞা জারি করেছে যুক্তরাষ্ট্র</li>
+            <li>মিয়ানমারে নতুন আইন; নির্বাচন নিয়ে সমালোচনায় করলেই গ্রেফতার</li>
+          </ul>
+          <a href="#" class="bdcnd-see-more">আরো.. »</a>
+        </div>
+
+        <div class="bdcnd-col-box">
+          <div class="bdcnd-sec-header"><span class="bdcnd-ico"></span> বিনোদন</div>
+          <img class="bdcnd-main-img" src="https://picsum.photos/seed/ent-main/300/150" alt="">
+          <div class="bdcnd-col-body">
+            <h3>জমকালো আয়োজনে 'নীল চোখ' চলচ্চিত্রের মহরত</h3>
+          </div>
+          <ul class="bdcnd-bullet-list">
+            <li>আমার সঙ্গে বুবলীর সম্পর্ক নেই, তাকে নিয়ে কথা বলতেই চাই না : শাকিব খান</li>
+            <li>'অল্প স্বল্প গল্প' নিয়ে ফিরলেন আরকে রিজন</li>
+            <li>ফেসবুকে লাইভে মাথায় গুলি করে আত্মঘাতী চিত্রনায়ক রিয়াজ আহমেদের শত্রু</li>
+            <li>নতুন বছর প্রবাসীদের নিয়ে কাজ করতে চান অভিনেত্রী উর্মি</li>
+          </ul>
+          <a href="#" class="bdcnd-see-more">আরো.. »</a>
+        </div>
+      </div>
+
+      <!-- ================= গণমাধ্যম / চাকরির খবর ================= -->
+      <div class="bdcnd-two-col">
+        <div class="bdcnd-col-box">
+          <div class="bdcnd-sec-header"><span class="bdcnd-ico"></span> গণমাধ্যম</div>
+          <div class="bdcnd-thumb-grid">
+            <div class="bdcnd-thumb-cell">
+              <img src="https://picsum.photos/seed/gm1/150/90" alt="">
+              <h4>মিডিয়ার কারণে আমরাও চাপে থাকি : সিইসি</h4>
+            </div>
+            <div class="bdcnd-thumb-cell">
+              <img src="https://picsum.photos/seed/gm2/150/90" alt="">
+              <h4>ব্র্যাক মাইগ্রেশন অ্যাওয়ার্ড পেলেন রাকিব হাসান</h4>
+            </div>
+            <div class="bdcnd-thumb-cell">
+              <img src="https://picsum.photos/seed/gm3/150/90" alt="">
+              <h4>ডিআরইউ সদস্যদের গ্রুপ বীমার বার্ষিক প্রিমিয়াম প্রদান</h4>
+            </div>
+            <div class="bdcnd-thumb-cell">
+              <img src="https://picsum.photos/seed/gm4/150/90" alt="">
+              <h4>বাংলাদেশ প্রেসক্লাব অব মালয়েশিয়ার মতবিনিময় সভা অনুষ্ঠিত</h4>
+            </div>
+            <div class="bdcnd-thumb-cell">
+              <img src="https://picsum.photos/seed/gm5/150/90" alt="">
+              <h4>সাংবাদিক গোলাম মহনুল আহসানের পিতার ইন্তেকালে ডিআরইউ'র শোক প্রকাশ</h4>
+            </div>
+            <div class="bdcnd-thumb-cell">
+              <img src="https://picsum.photos/seed/gm6/150/90" alt="">
+              <h4>সাংবাদিক আতিকের বাবার মৃত্যুতে মির্জা ফখরুলের শোক</h4>
+            </div>
+          </div>
+          <a href="#" class="bdcnd-see-more">আরো.. »</a>
+        </div>
+
+        <div class="bdcnd-col-box">
+          <div class="bdcnd-sec-header"><span class="bdcnd-ico"></span> চাকরির খবর</div>
+          <ul class="bdcnd-job-list">
+            <li>
+              <img src="https://picsum.photos/seed/job1/80/80" alt="">
+              <h5>পদ্মা অয়েল কোম্পানিতে পদ পেতে এমডির ওপর চড়াও হলেন ডিজিএম ফারুক</h5>
+            </li>
+            <li>
+              <img src="https://picsum.photos/seed/job2/80/80" alt="">
+              <h5>একযোগে ৬৪ জেলার পুলিশ সুপারকে (এসপি) বদলির তালিকা প্রকাশ</h5>
+            </li>
+            <li>
+              <img src="https://picsum.photos/seed/job3/80/80" alt="">
+              <h5>পুলিশের ৯ কর্মকর্তা বাধ্যতামূলক অবসরে</h5>
+            </li>
+            <li>
+              <img src="https://picsum.photos/seed/job4/80/80" alt="">
+              <h5>'সচিবালয়ে ফ্যাসিবাদের হাতকে শক্তিশালী করা ব্যক্তিদের বিরুদ্ধে কঠোর ব্যবস্থা নেওয়া হচ্ছে'</h5>
+            </li>
+          </ul>
+          <a href="#" class="bdcnd-see-more">আরো.. »</a>
+        </div>
+      </div>
+
+      <!-- ================= বিজ্ঞান ও তথ্যপ্রযুক্তি / মতামত / অর্থনীতি ================= -->
+      <div class="bdcnd-three-col">
+        <div class="bdcnd-col-box">
+          <div class="bdcnd-sec-header"><span class="bdcnd-ico"></span> বিজ্ঞান ও তথ্যপ্রযুক্তি</div>
+          <img class="bdcnd-main-img" src="https://picsum.photos/seed/tech-main/300/150" alt="">
+          <div class="bdcnd-col-body">
+            <h3>কোডেস ব্রেক লিমিটেড: সল্যুশন ওরিয়েন্টেড প্রযুক্তি সহযোগিতার নতুন দিগন্ত</h3>
+          </div>
+          <ul class="bdcnd-bullet-list">
+            <li>ইলন মাস্কের ইন্টারনেট শাটডাউন চিরতরে বন্ধ করতে স্টারলিংককে বাংলাদেশে আনা হচ্ছে: প্রেস সচিব</li>
+            <li>অবৈধ মোবাইল ফোন আগামী জুলাই মাসে বন্ধ হতে পারে জানালেন প্রতিমন্ত্রী</li>
+            <li>পৃথিবীর কেন্দ্রস্থল বিপরীত দিকে ঘুরছে</li>
+            <li>মহাকাশে বঙ্গবন্ধু স্যাটেলাইট-২ উৎক্ষেপণের জন্য সহযোগিতা স্মারক সই</li>
+          </ul>
+          <a href="#" class="bdcnd-see-more">আরো.. »</a>
+        </div>
+
+        <div class="bdcnd-col-box">
+          <div class="bdcnd-sec-header"><span class="bdcnd-ico"></span> মতামত</div>
+          <img class="bdcnd-main-img" src="https://picsum.photos/seed/opinion1/300/150" alt="">
+          <div class="bdcnd-col-body">
+            <h3>ধর্ষিতার ছবি প্রকাশের মাধ্যমে গণমাধ্যম সমাজের কোন দিকটা সামনে আনতে চাইছে!</h3>
+          </div>
+          <ul class="bdcnd-bullet-list">
+            <li>দ্রুত ফিরে আসার প্রত্যাশায়</li>
+            <li>এক্সক্লুসিভ রিপোর্টের নেশায় থাকতাম</li>
+          </ul>
+          <a href="#" class="bdcnd-see-more">আরো.. »</a>
+        </div>
+
+        <div class="bdcnd-col-box">
+          <div class="bdcnd-sec-header"><span class="bdcnd-ico"></span> অর্থনীতি</div>
+          <img class="bdcnd-main-img" src="https://picsum.photos/seed/eco-main/300/150" alt="">
+          <div class="bdcnd-col-body">
+            <h3>ঢাকা বিমানবন্দরের আগুনে ১২ হাজার কোটি টাকার ক্ষয়ক্ষতি</h3>
+          </div>
+          <ul class="bdcnd-bullet-list">
+            <li>প্রধান উপদেষ্টার মালয়েশিয়া সফরে থাকছে যেসব সমঝোতা স্মারক</li>
+            <li>ভারতের ছয়টি প্রতিষ্ঠানের ওপর নিষেধাজ্ঞা জারি করেছে যুক্তরাষ্ট্র</li>
+            <li>ঢাকায় কেমিক্যাল ড্রাম বিস্ফোরণে ছড়ায় আগুন, পুড়ে ছাই ২০ দোকান</li>
+            <li>চলতি মৌসুমে কেন চালের দাম বেড়ে গেল, অবৈধ মজুতদারদের হুঁশিয়ারি : প্রধানমন্ত্রী</li>
+          </ul>
+          <a href="#" class="bdcnd-see-more">আরো.. »</a>
+        </div>
+      </div>
+
+      <!-- ================= শিক্ষা / সাহিত্য / ফিচার ================= -->
+      <div class="bdcnd-three-col">
+        <div class="bdcnd-col-box">
+          <div class="bdcnd-sec-header"><span class="bdcnd-ico"></span> শিক্ষা</div>
+          <img class="bdcnd-main-img" src="https://picsum.photos/seed/edu-main/300/150" alt="">
+          <div class="bdcnd-col-body">
+            <h3>পরিশ্রম ও সততা মানুষকে শূন্য থেকে সম্মান উচ্চতায় নিয়ে যায়: বাসস চেয়ারম্যান</h3>
+          </div>
+          <ul class="bdcnd-bullet-list">
+            <li>রোজায় টানা ৩৫ দিনের ছুটিতে শিক্ষাপ্রতিষ্ঠান</li>
+            <li>ওসমান হাদী গুলিবিদ্ধ, কঠোর হুঁশিয়ারি দিলেন ঢাকসু ভিপি সাদিক কায়েম</li>
+            <li>মালয়েশিয়ার বিশ্ববিদ্যালয়ে ভর্তির সুযোগ</li>
+            <li>দেশের সকল শিক্ষাপ্রতিষ্ঠানে ফিলিস্তিনের পতাকা উত্তোলন করবে ছাত্রলীগ</li>
+            <li>২০২৩ সালে দেশে মোট ৫১৩ জন শিক্ষার্থী আত্মহত্যা করেছে</li>
+          </ul>
+          <a href="#" class="bdcnd-see-more">আরো.. »</a>
+        </div>
+
+        <div class="bdcnd-col-box">
+          <div class="bdcnd-sec-header"><span class="bdcnd-ico"></span> সাহিত্য</div>
+          <img class="bdcnd-main-img" src="https://picsum.photos/seed/lit1/300/150" alt="">
+          <div class="bdcnd-col-body">
+            <h3>বইমেলায় সাদিয়া আফরিনের 'দহনদিনের জোছনাফুল'</h3>
+          </div>
+          <ul class="bdcnd-bullet-list">
+            <li>প্রকাশিত হয়েছে জহির সাদাতের কাব্যগ্রন্থ "কাব্যার লাইসেন্স"</li>
+          </ul>
+          <a href="#" class="bdcnd-see-more">আরো.. »</a>
+        </div>
+
+        <div class="bdcnd-col-box">
+          <div class="bdcnd-sec-header"><span class="bdcnd-ico"></span> ফিচার</div>
+          <img class="bdcnd-main-img" src="https://picsum.photos/seed/feature-main/300/150" alt="">
+          <div class="bdcnd-col-body">
+            <h3>মালয়েশিয়ায় মহানগর যুবদলের উদ্যোগে বেগম খালেদা জিয়ার সুস্থতা কামনায় দোয়া মাহফিল</h3>
+          </div>
+          <ul class="bdcnd-bullet-list">
+            <li>সম্পর্কে ভালো-মন্দ থাকবেই, যেগুলো সম্পর্কে ভালোবাসা বাড়িয়ে দেবে</li>
+            <li>ছেলেদের তুলনায় মেয়েরা যেসব কারণে বেশি প্রেমে পড়েন</li>
+          </ul>
+          <a href="#" class="bdcnd-see-more">আরো.. »</a>
+        </div>
+      </div>
+
+      <!-- ================= গ্যালারি ================= -->
+      <div class="bdcnd-two-col">
+        <div class="bdcnd-gallery-box">
+          <div class="bdcnd-sec-header"><span class="bdcnd-ico"></span> ফটো গ্যালারী</div>
+          <img src="https://picsum.photos/seed/photo-gallery/500/300" alt="">
+          <div class="bdcnd-gallery-cap">খেজুরের রস সংগ্রহে ব্যস্ত করেছেন গাছিরা।</div>
+        </div>
+        <div class="bdcnd-gallery-box">
+          <div class="bdcnd-sec-header"><span class="bdcnd-ico"></span> ভিডিও গ্যালারী</div>
+          <div class="bdcnd-video-box">
+            <div class="bdcnd-yt">▶ YouTube</div>
+            <div class="bdcnd-msg">Video unavailable</div>
+            <div class="bdcnd-sub">This video is no longer available because the YouTube account associated with this video has been closed.</div>
+            <div class="bdcnd-video-nav">›</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /bdcnd-main-col -->
+
+    <!-- ========== SIDEBAR ========== -->
+    <div class="bdcnd-side-col">
+
+      <div class="bdcnd-widget">
+        <div class="bdcnd-widget-header">ফেসবুক পেজ</div>
+        <div class="bdcnd-widget-body">
+          <div class="bdcnd-fb-embed">
+            <div class="bdcnd-fb-title">BDC News Desk</div>
+            <div>দেশের প্রথম সারির অনলাইন নিউজ পোর্টাল</div>
+            <button>Like Page</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bdcnd-widget">
+        <div class="bdcnd-widget-header">আর্কাইভ</div>
+        <div class="bdcnd-widget-body">
+          <div class="bdcnd-archive-row">
+            <input type="text" placeholder="তারিখ নির্বাচিত করুন">
+            <button>খুঁজুন</button>
+          </div>
+          <div class="bdcnd-tab-row">
+            <div class="bdcnd-tab bdcnd-active">সর্বশেষ</div>
+            <div class="bdcnd-tab">জনপ্রিয়</div>
+          </div>
+          <ul class="bdcnd-recent-list">
+            <li>
+              <img src="https://picsum.photos/seed/rc1/80/60" alt="">
+              <h5>আওয়ামীপন্থি সিবিএ নেতার কবজায় জাতীয় গৃহায়ন কর্তৃপক্ষ</h5>
+            </li>
+            <li>
+              <img src="https://picsum.photos/seed/rc2/80/60" alt="">
+              <h5>জমকালো আয়োজনে 'নীল চোখ' চলচ্চিত্রের মহরত</h5>
+            </li>
+            <li>
+              <img src="https://picsum.photos/seed/rc3/80/60" alt="">
+              <h5>প্রবাসে ক্রিকেট ও বাঙালিয়ানার উৎসব, ফ্লাডলাইটে মুখোমুখি আট দল</h5>
+            </li>
+            <li>
+              <img src="https://picsum.photos/seed/rc4/80/60" alt="">
+              <h5>সাব-রেজিস্ট্রার বদলিতে আসিফ নজরুলের শত কোটি টাকার দুর্নীতি</h5>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bdcnd-widget">
+        <div class="bdcnd-widget-header">প্রবাস</div>
+        <div class="bdcnd-side-feature">
+          <img src="https://picsum.photos/seed/probash-main/400/220" alt="">
+          <h4>প্রবাসে ক্রিকেট ও বাঙালিয়ানার উৎসব, ফ্লাডলাইটে মুখোমুখি আট দল</h4>
+        </div>
+        <ul class="bdcnd-side-list">
+          <li>
+            <img src="https://picsum.photos/seed/pb1/70/60" alt="">
+            <h5>মালয়েশিয়ায় কালিয়াচাপড়া প্রবাসীদের উদ্যোগে ইফতার ও দোয়া মাহফিল অনুষ্ঠিত</h5>
+          </li>
+          <li>
+            <img src="https://picsum.photos/seed/pb2/70/60" alt="">
+            <h5>মালয়েশিয়ায় প্রীতি ফুটসাল ম্যাচে জামাল ভুঁইয়ার গোল সরল দলের জয়</h5>
+          </li>
+          <li>
+            <img src="https://picsum.photos/seed/pb3/70/60" alt="">
+            <h5>যথাযোগ্য মর্যাদায় মালয়েশিয়ায় মহান বিজয় দিবস উদযাপন</h5>
+          </li>
+        </ul>
+      </div>
+
+      <div class="bdcnd-widget">
+        <div class="bdcnd-widget-header">মাদ্রাসাশিক্ষা</div>
+        <ul class="bdcnd-side-list" style="padding-top:12px;">
+          <li>
+            <img src="https://picsum.photos/seed/md1/70/60" alt="">
+            <h5>মালয়েশিয়ায় মাদ্রাসা আন্তর্জাতিক হালাল ফেস্টিভালে বাংলাদেশের অংশগ্রহণ</h5>
+          </li>
+          <li>
+            <img src="https://picsum.photos/seed/md2/70/60" alt="">
+            <h5>মাদ্রাসাশিক্ষা প্রতিষ্ঠানের উদ্যোগে ইফতার ও দোয়া মাহফিল অনুষ্ঠিত</h5>
+          </li>
+          <li>
+            <img src="https://picsum.photos/seed/md3/70/60" alt="">
+            <h5>মাদ্রাসাশিক্ষা প্রীতি ফুটসাল ম্যাচে জামাল ভুঁইয়ার গোল সরল দল</h5>
+          </li>
+          <li>
+            <img src="https://picsum.photos/seed/md4/70/60" alt="">
+            <h5>যথাযোগ্য মর্যাদায় মাদ্রাসায় মহান বিজয় দিবস উদযাপন</h5>
+          </li>
+        </ul>
+      </div>
+
+      <div class="bdcnd-widget">
+        <div class="bdcnd-widget-header">সর্বাধিক পঠিত</div>
+        <div class="bdcnd-widget-body">
+          <ul class="bdcnd-rank-list">
+            <li>
+              <div class="bdcnd-rank-num">১</div>
+              <h5>আওয়ামীপন্থি সিবিএ নেতার কবজায় জাতীয় গৃহায়ন কর্তৃপক্ষ</h5>
+            </li>
+            <li>
+              <div class="bdcnd-rank-num">২</div>
+              <h5>সাব-রেজিস্ট্রার বদলিতে আসিফ নজরুলের শত কোটি টাকার দুর্নীতি</h5>
+            </li>
+            <li>
+              <div class="bdcnd-rank-num">৩</div>
+              <h5>জমকালো আয়োজনে 'নীল চোখ' চলচ্চিত্রের মহরত</h5>
+            </li>
+            <li>
+              <div class="bdcnd-rank-num">৪</div>
+              <h5>প্রবাসে ক্রিকেট ও বাঙালিয়ানার উৎসব, ফ্লাডলাইটে মুখোমুখি আট দল</h5>
+            </li>
+            <li>
+              <div class="bdcnd-rank-num">৫</div>
+              <h5>ঢাকা বিমানবন্দরের আগুনে ১২ হাজার কোটি টাকার ক্ষয়ক্ষতি</h5>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bdcnd-widget">
+        <div class="bdcnd-widget-body">
+          <div class="bdcnd-side-ad">আপনার প্রতিষ্ঠানের বিশ্বব্যাপী প্রচারের জন্য বিজ্ঞাপন দিন</div>
+        </div>
+      </div>
+
+    </div><!-- /bdcnd-side-col -->
+  </div><!-- /bdcnd-content-layout -->
+</div><!-- /bdcnd-wrap -->
+
+<!-- ================= FOOTER ================= -->
+<div class="bdcnd-footer">
+  <div class="bdcnd-wrap">
+    <div class="bdcnd-footer-inner">
+      <div class="bdcnd-footer-logo">
+        <div class="bdcnd-logo-box">
+          <div class="bdcnd-star-cluster">
+            <svg viewBox="0 0 60 70" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="bdcnd-g2" x1="0" y1="1" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#8a8a8a"/>
+                  <stop offset="100%" stop-color="#fff2b0"/>
+                </linearGradient>
+              </defs>
+              <g fill="url(#bdcnd-g2)">
+                <polygon points="10,66 12,60 14,66 20,66 15,70 17,76 10,72 3,76 5,70 0,66" transform="translate(0,-10) scale(0.5)"/>
+                <polygon points="18,56 21,49 24,56 31,56 25,60 28,67 21,63 14,67 17,60 11,56" transform="translate(-2,-4) scale(0.62)"/>
+                <polygon points="24,42 28,33 32,42 41,42 34,47 37,56 28,51 19,56 22,47 15,42" transform="translate(0,4) scale(0.72)"/>
+                <polygon points="30,26 35,15 40,26 51,26 42,32 46,43 35,37 24,43 28,32 19,26" transform="translate(2,8) scale(0.85)"/>
+                <polygon points="36,8 42,-6 48,8 62,8 51,15 56,29 42,21 28,29 33,15 22,8" transform="translate(3,14) scale(1)"/>
+              </g>
+            </svg>
+          </div>
+          <div class="bdcnd-logo-text">BDC News Desk</div>
+        </div>
+      </div>
+      <div class="bdcnd-footer-meta">
+        সম্পাদক: মোহাম্মদ মনিরুজ্জামান<br>
+        ইমেইল: newsbdcnewsdesk@gmail.com
+      </div>
+    </div>
+    <div class="bdcnd-footer-bottom">
+      এই ওয়েবসাইটের কোনো লেখা, ছবি, ভিডিও অনুমতি ছাড়া ব্যবহার করা যাবে না। Design and Developed by <a href="#">Design Host Bd</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

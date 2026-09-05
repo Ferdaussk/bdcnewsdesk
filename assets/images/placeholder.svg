@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 400" role="img" aria-label="BDC News Desk">
+  <rect width="700" height="400" fill="#eef1f5"/>
+  <rect width="700" height="400" fill="#170192" fill-opacity="0.04"/>
+  <g fill="none" stroke="#170192" stroke-width="3" stroke-opacity="0.35">
+    <rect x="260" y="150" width="180" height="130" rx="4"/>
+    <circle cx="350" cy="215" r="34"/>
+    <path d="M280 260 L320 220 L360 245 L400 205 L420 260 Z"/>
+  </g>
+  <text x="350" y="330" text-anchor="middle" font-family="Archivo Black, sans-serif" font-size="22" fill="#170192" fill-opacity="0.55">BDC NEWS DESK</text>
+</svg>

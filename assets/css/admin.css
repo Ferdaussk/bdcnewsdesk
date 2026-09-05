@@ -1,0 +1,16 @@
+.bdcnd-dash{max-width:1100px;margin-top:20px;}
+.bdcnd-dash-header{display:flex;align-items:center;gap:14px;background:var(--bdcnd-primary,#170192);color:#fff;padding:20px 24px;border-radius:4px;margin-bottom:20px;}
+.bdcnd-dash-header h1{color:#fff;margin:0;font-size:22px;}
+.bdcnd-dash-header p{margin:4px 0 0;opacity:.85;}
+.bdcnd-dash-grid{display:grid;grid-template-columns:2fr 1fr;gap:20px;align-items:start;}
+.bdcnd-dash-card{background:#fff;border:1px solid #dcdcde;border-radius:4px;padding:18px 20px;margin-bottom:20px;}
+.bdcnd-dash-card h2{font-size:15px;margin:0 0 14px;padding-bottom:10px;border-bottom:1px solid #eee;}
+.bdcnd-status-list{margin:0;}
+.bdcnd-status-list li{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px dashed #eee;font-size:13px;}
+.bdcnd-status-list li:first-child{border-top:none;}
+.bdcnd-status-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.bdcnd-status-dot.is-ok{background:#2e8b3d;}
+.bdcnd-status-dot.is-warn{background:#e8432c;}
+.bdcnd-dash-actions{display:flex;flex-wrap:wrap;gap:10px;}
+.bdcnd-dash-actions .button{display:flex;align-items:center;gap:6px;}
+.bdcnd-dash-note{font-size:12px;color:#646970;margin-top:10px;}

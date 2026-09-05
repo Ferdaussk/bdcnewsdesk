@@ -1,0 +1,36 @@
+/*
+ * BDC News Desk - Design Tokens
+ * Centralized palette/spacing variables extracted from the approved
+ * homepage design. Every theme stylesheet and Elementor widget should
+ * read colors from these custom properties rather than hard-coding hex
+ * values, so the whole site re-themes from one place.
+ */
+:root {
+	/* Brand palette */
+	--bdcnd-primary: #170192;
+	--bdcnd-primary-dark: #0e0166;
+	--bdcnd-secondary: #9a1516;
+	--bdcnd-accent: #e8432c;
+	--bdcnd-success: #2e8b3d;
+	--bdcnd-tan: #c9bfa0;
+
+	/* Typography colors */
+	--bdcnd-headline: #16325c;
+	--bdcnd-text: #222222;
+	--bdcnd-muted: #6b6b6b;
+	--bdcnd-link: #1a4fa0;
+
+	/* Surfaces */
+	--bdcnd-background: #eef1f5;
+	--bdcnd-surface: #ffffff;
+	--bdcnd-border: #dbe3ef;
+
+	/* Typography */
+	--bdcnd-font-body: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
+	--bdcnd-font-display: 'Archivo Black', 'Hind Siliguri', sans-serif;
+
+	/* Layout */
+	--bdcnd-max-width: 1240px;
+	--bdcnd-radius: 2px;
+	--bdcnd-gap: 14px;
+}
