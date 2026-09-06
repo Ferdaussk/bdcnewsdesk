@@ -66,7 +66,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 </div>
 
 <div class="bdcnd-navbar">
-	<div class="bdcnd-wrap">
+	<div class="bdcnd-wrap bdcnd-navbar-inner">
 		<button type="button" class="bdcnd-nav-toggle" aria-expanded="false" aria-controls="bdcnd-primary-menu">
 			<span class="screen-reader-text"><?php esc_html_e( 'Menu', 'bdc-news-desk' ); ?></span>&#9776;
 		</button>
