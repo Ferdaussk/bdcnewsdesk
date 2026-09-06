@@ -101,7 +101,7 @@ ul{margin:0;padding:0;list-style:none;}
 .bdcnd-ticker-bar{background:#fbfcfe;border:1px solid var(--bdcnd-border);margin-top:10px;display:flex;align-items:stretch;border-radius:var(--bdcnd-radius);overflow:hidden;}
 .bdcnd-ticker-label{background:var(--bdcnd-primary);color:#fff;font-weight:700;padding:9px 16px;font-size:13px;white-space:nowrap;display:flex;align-items:center;}
 .bdcnd-ticker-track{flex:1;overflow:hidden;position:relative;display:flex;align-items:center;padding:0 12px;}
-.bdcnd-ticker-content{white-space:nowrap;animation:bdcnd-ticker 80s linear infinite;color:var(--bdcnd-headline);font-size:13px;font-weight:600;}
+.bdcnd-ticker-content{white-space:nowrap;animation:bdcnd-ticker 150s linear infinite;color:var(--bdcnd-headline);font-size:13px;font-weight:600;}
 .bdcnd-ticker-content span{margin-right:60px;}
 @keyframes bdcnd-ticker{ 0%{transform:translateX(100%);} 100%{transform:translateX(-100%);} }
 .bdcnd-ticker-tag{display:flex;align-items:center;gap:6px;padding:0 14px;font-size:12.5px;white-space:nowrap;color:#333;}
