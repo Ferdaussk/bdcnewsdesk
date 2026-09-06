@@ -29,6 +29,7 @@ ul{margin:0;padding:0;list-style:none;}
 	display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap;
 	background:var(--bdcnd-surface);border:1px solid var(--bdcnd-border);border-bottom:none;
 	border-radius:6px 6px 0 0;padding:16px 20px;
+	box-shadow:0 4px 14px rgba(23,1,146,0.08);
 }
 
 .bdcnd-logo-cell{display:flex;flex-direction:column;gap:4px;}
@@ -83,6 +84,7 @@ ul{margin:0;padding:0;list-style:none;}
 .bdcnd-navbar-inner{
 	display:flex;align-items:center;
 	background:var(--bdcnd-primary);border:1px solid var(--bdcnd-border);border-top:none;border-radius:0 0 6px 6px;
+	box-shadow:0 4px 14px rgba(23,1,146,0.08);
 }
 .bdcnd-nav-toggle{display:none;background:none;border:none;color:#fff;font-size:20px;padding:10px 14px;cursor:pointer;}
 .bdcnd-navbar ul{display:flex;flex-wrap:wrap;flex:1;}
