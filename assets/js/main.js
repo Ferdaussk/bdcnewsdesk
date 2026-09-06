@@ -26,6 +26,18 @@
 			} );
 		} );
 
+		// Repeat the parent item's own label as a header inside its dropdown.
+		document.querySelectorAll( '.bdcnd-navbar .menu-item-has-children' ).forEach( function ( item ) {
+			var link = item.querySelector( ':scope > a' );
+			var submenu = item.querySelector( ':scope > .sub-menu' );
+			if ( link && submenu && ! submenu.querySelector( '.bdcnd-submenu-title' ) ) {
+				var title = document.createElement( 'li' );
+				title.className = 'bdcnd-submenu-title';
+				title.textContent = link.textContent.trim();
+				submenu.insertBefore( title, submenu.firstChild );
+			}
+		} );
+
 		var tabs = document.querySelectorAll( '.bdcnd-tab-row .bdcnd-tab' );
 		tabs.forEach( function ( tab ) {
 			tab.addEventListener( 'click', function () {

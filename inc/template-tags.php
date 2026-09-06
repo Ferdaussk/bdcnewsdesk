@@ -417,3 +417,16 @@ function bdcnd_pagination() {
 		echo '<nav class="bdcnd-pagination">' . wp_kses_post( $links ) . '</nav>';
 	}
 }
+
+/**
+ * Home > Current Page breadcrumb, used on category archives.
+ */
+function bdcnd_breadcrumb() {
+	echo '<nav class="bdcnd-breadcrumb" aria-label="' . esc_attr__( 'Breadcrumb', 'bdc-news-desk' ) . '">';
+	echo '<a href="' . esc_url( home_url( '/' ) ) . '">&#127968;</a>';
+	if ( is_category() ) {
+		echo '<span class="bdcnd-crumb-sep">&rsaquo;</span>';
+		echo '<span class="bdcnd-crumb-current">' . esc_html( single_cat_title( '', false ) ) . '</span>';
+	}
+	echo '</nav>';
+}

@@ -101,3 +101,16 @@ function bdcnd_content_width() {
 	$GLOBALS['content_width'] = apply_filters( 'bdcnd_content_width', 900 );
 }
 add_action( 'after_setup_theme', 'bdcnd_content_width', 0 );
+
+/**
+ * Category archives are laid out as hero + text-grid + read-more list
+ * (see category.php), which needs more posts per page than a plain list.
+ *
+ * @param WP_Query $query Main query.
+ */
+function bdcnd_category_posts_per_page( $query ) {
+	if ( ! is_admin() && $query->is_main_query() && is_category() ) {
+		$query->set( 'posts_per_page', 16 );
+	}
+}
+add_action( 'pre_get_posts', 'bdcnd_category_posts_per_page' );
