@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <?php wp_body_open(); ?>
 
 <a class="skip-link screen-reader-text" href="#bdcnd-content"><?php esc_html_e( 'Skip to content', 'bdc-news-desk' ); ?></a>
-
+<div class="boxshadow-contain">
 <div class="bdcnd-topbar">
 	<div class="bdcnd-wrap bdcnd-topbar-inner">
 		<div class="bdcnd-logo-cell">

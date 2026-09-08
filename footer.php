@@ -10,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 </div><!-- #bdcnd-content -->
+</div><!-- .boxshadow-contain -->
 
 <div class="bdcnd-footer">
 	<div class="bdcnd-wrap">
