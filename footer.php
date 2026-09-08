@@ -9,8 +9,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-</div><!-- #bdcnd-content -->
-</div><!-- .boxshadow-contain -->
 
 <div class="bdcnd-footer">
 	<div class="bdcnd-wrap">
@@ -82,6 +80,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</div>
 </div>
 
+</div><!-- #bdcnd-content -->
+</div><!-- .boxshadow-contain -->
 <?php wp_footer(); ?>
 </body>
 </html>
