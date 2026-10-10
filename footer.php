@@ -21,6 +21,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<div class="bdcnd-footer-inner">
 			<div class="bdcnd-footer-logo">
+				<?php if ( has_custom_logo() ) : ?>
+					<?php the_custom_logo(); ?>
+				<?php else : ?>
 				<span class="bdcnd-logo-box">
 					<span class="bdcnd-star-cluster">
 						<svg viewBox="0 0 60 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -41,6 +44,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					</span>
 					<span class="bdcnd-logo-text"><?php bloginfo( 'name' ); ?></span>
 				</span>
+				<?php endif; ?>
 			</div>
 			<div class="bdcnd-footer-meta">
 				<?php $editor = get_theme_mod( 'bdcnd_footer_editor' ); ?>

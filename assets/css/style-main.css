@@ -36,6 +36,11 @@ ul{margin:0;padding:0;list-style:none;}
 .bdcnd-logo-cell{display:flex;flex-direction:column;gap:4px;}
 .bdcnd-logo-cell .custom-logo-link{display:block;}
 .bdcnd-logo-cell img.custom-logo{max-height:60px;width:auto;}
+
+.bdcnd-footer-logo img.custom-logo{
+	width: 100px;
+}
+
 .bdcnd-logo-mobile{display:none;}
 .bdcnd-logo-box{
 	background:var(--bdcnd-primary);
