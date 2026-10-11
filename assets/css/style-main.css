@@ -234,7 +234,7 @@ ul{margin:0;padding:0;list-style:none;}
 .bdcnd-widget-body{padding:12px 14px;}
 .bdcnd-widget ul{padding:12px 14px;}
 .bdcnd-fb-embed{
-	background:linear-gradient(135deg,#1877f2,#0d5cc4);color:#fff;border-radius:var(--bdcnd-radius);padding:18px;text-align:center;font-size:12px;
+	background:linear-gradient(135deg,#072A6C,#002366);color:#fff;border-radius:var(--bdcnd-radius);padding:18px;text-align:center;font-size:12px;
 }
 .bdcnd-fb-embed .bdcnd-fb-title{font-weight:700;font-size:14px;margin-bottom:6px;}
 .bdcnd-fb-embed a.bdcnd-fb-btn{display:inline-block;margin-top:10px;background:#fff;color:#1877f2;border:none;padding:6px 14px;border-radius:var(--bdcnd-radius);font-weight:700;font-size:12px;cursor:pointer;}
