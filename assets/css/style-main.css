@@ -16,7 +16,7 @@ img{display:block;max-width:100%;height:auto;}
 .bdcnd-wrap{max-width:var(--bdcnd-max-width);margin:0 auto;padding:0 10px;}
 .boxshadow-contain{max-width:var(--bdcnd-max-width);padding: 0px 20px;margin:0 auto;box-shadow:0 0 24px rgba(23,1,146,0.10);}
 ul{margin:0;padding:0;list-style:none;}
-.bdcnd-placeholder-img{background:var(--bdcnd-background);}
+.bdcnd-placeholder-img{background:var(--bdcnd-primary);}
 
 .screen-reader-text{
 	position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;
