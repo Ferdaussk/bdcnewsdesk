@@ -22,15 +22,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php $fb_url = get_theme_mod( 'bdcnd_facebook_url' ); ?>
 		<div class="bdcnd-widget">
 			<div class="bdcnd-widget-header"><?php esc_html_e( 'ফেসবুক পেজ', 'bdc-news-desk' ); ?></div>
-			<div class="bdcnd-widget-body">
-				<div class="bdcnd-fb-embed">
-					<div class="bdcnd-fb-title"><?php bloginfo( 'name' ); ?></div>
-					<div><?php bloginfo( 'description' ); ?></div>
-					<?php if ( $fb_url ) : ?>
-						<a class="bdcnd-fb-btn" href="<?php echo esc_url( $fb_url ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Like Page', 'bdc-news-desk' ); ?></a>
-					<?php endif; ?>
-				</div>
-			</div>
+			<div class="bdcnd-widget-header"><?php esc_html_e( 'আর্কাইভ', 'bdc-news-desk' ); ?></div>
+			<form class="bdcnd-search-block bdcnd-sd-search-block" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+				<label class="screen-reader-text" for="bdcnd-s"><?php esc_html_e( 'Search', 'bdc-news-desk' ); ?></label>
+				<input type="text" id="bdcnd-s" name="s" placeholder="<?php esc_attr_e( 'লিখুন...', 'bdc-news-desk' ); ?>" value="<?php echo esc_attr( get_search_query() ); ?>">
+				<button type="submit"><?php esc_html_e( 'খুঁজুন', 'bdc-news-desk' ); ?></button>
+			</form>
 		</div>
 
 		<div class="bdcnd-widget">

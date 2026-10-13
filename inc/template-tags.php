@@ -93,12 +93,34 @@ function bdcnd_the_thumb( $post_id, $size = 'bdcnd-thumb', $attrs = array() ) {
 		return;
 	}
 	$class = trim( 'bdcnd-placeholder-img ' . ( isset( $attrs['class'] ) ? $attrs['class'] : '' ) );
+	list( $width, $height ) = bdcnd_registered_image_size( $size );
 	printf(
-		'<img src="%1$s" alt="%2$s" loading="lazy" class="%3$s">',
+		'<img src="%1$s" width="%2$d" height="%3$d" alt="%4$s" loading="lazy" class="%5$s">',
 		esc_url( bdcnd_placeholder_image() ),
+		$width,
+		$height,
 		esc_attr( get_the_title( $post_id ) ),
 		esc_attr( $class )
 	);
+}
+
+/**
+ * Look up the width/height a theme-registered image size was defined with,
+ * so the placeholder <img> can carry the same width/height HTML attributes
+ * a real featured image of that size would have (not just matching CSS).
+ *
+ * @param string $size Registered image size name.
+ * @return array{0:int,1:int} width, height
+ */
+function bdcnd_registered_image_size( $size ) {
+	global $_wp_additional_image_sizes;
+	if ( isset( $_wp_additional_image_sizes[ $size ] ) ) {
+		return array(
+			(int) $_wp_additional_image_sizes[ $size ]['width'],
+			(int) $_wp_additional_image_sizes[ $size ]['height'],
+		);
+	}
+	return array( 0, 0 );
 }
 
 /**
