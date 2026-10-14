@@ -19,7 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<?php else : ?>
 
-		<?php $fb_url = get_theme_mod( 'bdcnd_facebook_url' ); ?>
 		<div class="bdcnd-widget">
 			<div class="bdcnd-widget-header"><?php esc_html_e( 'ফেসবুক পেজ', 'bdc-news-desk' ); ?></div>
 			<div class="bdcnd-widget-header"><?php esc_html_e( 'আর্কাইভ', 'bdc-news-desk' ); ?></div>

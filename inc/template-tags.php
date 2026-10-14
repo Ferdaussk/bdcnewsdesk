@@ -445,10 +445,20 @@ function bdcnd_pagination() {
  */
 function bdcnd_breadcrumb() {
 	echo '<nav class="bdcnd-breadcrumb" aria-label="' . esc_attr__( 'Breadcrumb', 'bdc-news-desk' ) . '">';
-	echo '<a href="' . esc_url( home_url( '/' ) ) . '">&#127968;</a>';
+	echo '<a class="bdcnd-crumb-home" href="' . esc_url( home_url( '/' ) ) . '">&#127968;<span class="screen-reader-text">' . esc_html__( 'Home', 'bdc-news-desk' ) . '</span></a>';
+
 	if ( is_category() ) {
 		echo '<span class="bdcnd-crumb-sep">&rsaquo;</span>';
 		echo '<span class="bdcnd-crumb-current">' . esc_html( single_cat_title( '', false ) ) . '</span>';
+	} elseif ( is_single() ) {
+		$categories = get_the_category();
+		foreach ( $categories as $category ) {
+			echo '<span class="bdcnd-crumb-sep">&rsaquo;</span>';
+			echo '<a href="' . esc_url( get_category_link( $category->term_id ) ) . '">' . esc_html( $category->name ) . '</a>';
+		}
+		echo '<span class="bdcnd-crumb-sep">&rsaquo;</span>';
+		echo '<span class="bdcnd-crumb-current">' . esc_html( get_the_title() ) . '</span>';
 	}
+
 	echo '</nav>';
 }

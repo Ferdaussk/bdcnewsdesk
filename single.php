@@ -16,7 +16,11 @@ while ( have_posts() ) :
 	$categories = get_the_category();
 	?>
 	<div class="bdcnd-content-layout">
+		<?php get_template_part( 'template-parts/sidebar-single-left' ); ?>
+
 		<div class="bdcnd-main-col">
+			<?php bdcnd_breadcrumb(); ?>
+
 			<article <?php post_class( 'bdcnd-article' ); ?>>
 				<?php if ( ! empty( $categories ) ) : ?>
 					<a class="bdcnd-article-category" href="<?php echo esc_url( get_category_link( $categories[0]->term_id ) ); ?>"><?php echo esc_html( $categories[0]->name ); ?></a>
@@ -87,7 +91,7 @@ while ( have_posts() ) :
 			<?php endif; ?>
 		</div>
 
-		<?php get_sidebar(); ?>
+		<?php get_template_part( 'template-parts/sidebar-single-right' ); ?>
 	</div>
 	<?php
 endwhile;
